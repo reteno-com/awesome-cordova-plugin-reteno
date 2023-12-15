@@ -1,6 +1,6 @@
 {
   "name": "awesome-cordova-plugins-reteno",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Native plugin wrapper for cordova-plugin-reteno",
   "scripts": {
     "build:esm": "ts-node -P scripts/tsconfig.json scripts/tasks/build-esm",
