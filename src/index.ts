@@ -1,20 +1,26 @@
-import { Injectable } from '@angular/core';
-import { Cordova, Plugin, AwesomeCordovaNativePlugin } from '@awesome-cordova-plugins/core';
-import { Observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import {
+  Cordova,
+  Plugin,
+  AwesomeCordovaNativePlugin,
+} from "@awesome-cordova-plugins/core";
+import { Observable } from "rxjs";
 
-export interface Address {
+export type Address = {
   region?: string | null;
   town?: string | null;
   address?: string | null;
   postcode?: string | null;
 };
 
-interface Field {
+export type Field = {
   key: string;
   value: string;
 };
 
-export interface UserAttributes {
+export type Fields = Field[];
+
+export type UserAttributes = {
   phone?: string | null;
   email?: string | null;
   firstName?: string | null;
@@ -22,34 +28,45 @@ export interface UserAttributes {
   languageCode?: string | null;
   timeZone?: string | null;
   address?: Address | null;
-  fields?: Field[] | null;
+  fields?: Fields | null;
 };
 
-export interface User {
+export type User = {
   userAttributes?: UserAttributes | null;
   subscriptionKeys?: String[] | null;
   groupNamesInclude?: String[] | null;
   groupNamesExclude?: String[] | null;
 };
 
-export interface SetUserAttributesPayload {
+export type AnonymousUserAttributes = {
+  user: {
+    userAttributes: Pick<
+      UserAttributes,
+      | "firstName"
+      | "lastName"
+      | "languageCode"
+      | "timeZone"
+      | "address"
+      | "fields"
+    >;
+  };
+};
+
+export type SetUserAttributesPayload = {
   externalUserId: string;
-  userAttributes?: UserAttributes | null;
-  subscriptionKeys?: String[] | null;
-  groupNamesInclude?: String[] | null;
-  groupNamesExclude?: String[] | null;
+  user: User;
 };
 
-export interface CustomEventParameter {
+export type CustomEventParameter = {
   name: string;
   value?: string;
 };
 
-export interface LogEvent{
-  eventName: string,
-  date: string,
-  parameters: CustomEventParameter[],
-  forcePush?: boolean
+export interface LogEvent {
+  eventName: string;
+  date: string;
+  parameters: CustomEventParameter[];
+  forcePush?: boolean;
 }
 
 // We need two decorators @Plugin and @Injectable.
@@ -66,83 +83,72 @@ export interface LogEvent{
 // pluginRef == clobbers.target
 
 @Plugin({
-  pluginName: 'CordovaPluginReteno',
-  plugin: 'cordova-plugin-reteno',
-  pluginRef: 'RetenoPlugin',
-  platforms: ['Android', 'iOS'],
-  repo: 'https://github.com/reteno-com/reteno-cordova/tree/main/cordova-plugin-reteno'
+  pluginName: "CordovaPluginReteno",
+  plugin: "cordova-plugin-reteno",
+  pluginRef: "RetenoPlugin",
+  platforms: ["Android", "iOS"],
+  repo: "https://github.com/reteno-com/reteno-cordova/tree/main/cordova-plugin-reteno",
 })
 @Injectable()
 export class AwesomeCordovaPluginReteno extends AwesomeCordovaNativePlugin {
-
   // For every method, use the @Cordova decorator.
   // Since in our Cordova plugin JavaScript file (www/CordovaPluginExample.js)
   // we defined callback functions before parameters,
   // now we have to declare 'callbackOrder' as 'reverse'.
 
+  /**
+   * @deprecated this method of Reteno initialization is deprecated, becuase it led to incorrect initializations of native libraries,
+   * please refer to new documentation https://docs.reteno.com/reference/cordova-sdk-setup, IOS and Android SDK Setup sections
+   */
   @Cordova()
   setApiKey(apiKey: string): Promise<any> {
     return null;
   }
 
   @Cordova()
-  logEvent(
-      payload: LogEvent
-  ) : Promise<any> {
+  logEvent(payload: LogEvent): Promise<any> {
     return null;
   }
 
   @Cordova()
-  setUserAttributes(
-      payload: SetUserAttributesPayload
-  ) : Promise<any> {
+  setUserAttributes(payload: SetUserAttributesPayload): Promise<any> {
     return null;
   }
 
   @Cordova()
-  setAnonymousUserAttributes(
-      payload: User
-  ) : Promise<any> {
+  setAnonymousUserAttributes(payload: AnonymousUserAttributes): Promise<any> {
     return null;
   }
 
   @Cordova()
   getInitialNotification(
-      success: (value: object) => void,
-      error: (err: string) => void
-  ) : Promise<any> {
-    return null;
-  }
-
-  @Cordova()
-  setOnRetenoPushReceivedListener (): Promise<any> {
-    return null;
-  }
-  @Cordova()
-  performRemoteToken(
-      apiKey: string
-  ) : Promise<any> {
-    return null;
-  }
-
-  @Cordova()
-  setDeviceToken (
-      deviceToken: string
-  ) : Promise<any> {
-    return null;
-  }
-
-  @Cordova()
-  registerApplicationDidBecomeActiveListener(
-      fn: () => void,
+    success: (value: object) => void,
+    error: (err: string) => void
   ): Promise<any> {
     return null;
   }
 
   @Cordova()
-  registerApplicationDidEnterBackgroundListener(
-      fn: () => void,
-  ): Promise<any> {
+  setOnRetenoPushReceivedListener(): Promise<any> {
+    return null;
+  }
+  @Cordova()
+  performRemoteToken(apiKey: string): Promise<any> {
+    return null;
+  }
+
+  @Cordova()
+  setDeviceToken(deviceToken: string): Promise<any> {
+    return null;
+  }
+
+  @Cordova()
+  registerApplicationDidBecomeActiveListener(fn: () => void): Promise<any> {
+    return null;
+  }
+
+  @Cordova()
+  registerApplicationDidEnterBackgroundListener(fn: () => void): Promise<any> {
     return null;
   }
 }
