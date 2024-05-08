@@ -151,6 +151,11 @@ export class AwesomeCordovaPluginReteno extends AwesomeCordovaNativePlugin {
   registerApplicationDidEnterBackgroundListener(fn: () => void): Promise<any> {
     return null;
   }
+
+  @Cordova()
+  logScreenView(screenName: string): Promise<any> {
+    return null;
+  }
 }
 
 // Check more `@Plugin` and `@Cordova` options (and other details)
