@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import {
-  Cordova,
+  Cordova as cordova,
   Plugin,
   AwesomeCordovaNativePlugin,
 } from "@awesome-cordova-plugins/core";
@@ -393,179 +393,179 @@ export type RetenoPushButtonClickedListener = (payload: RetenoPushButtonClickedP
 @Injectable()
 export class AwesomeCordovaPluginReteno extends AwesomeCordovaNativePlugin {
   // Initialization
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   init(options?: RetenoInitializeOptions): Promise<any> {
     return;
   }
 
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   requestNotificationPermission(): Promise<RequestNotificationPermissionResult> {
     return;
   }
 
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   setLifecycleTrackingOptions(options: LifecycleTrackingOptions): Promise<any> {
     return;
   }
 
   // User data
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   setUserAttributes(payload: SetUserAttributesPayload): Promise<any> {
     return;
   }
 
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   setAnonymousUserAttributes(payload: UserAttributesAnonymous): Promise<any> {
     return;
   }
 
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   setMultiAccountUserAttributes(payload: SetMultiAccountUserAttributesPayload): Promise<any> {
     return;
   }
 
   // Event tracking
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   logEvent(payload: LogEventPayload): Promise<any> {
     return;
   }
 
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   logEcommerceEvent(payload: LogEcommerceEventPayload): Promise<any> {
     return;
   }
 
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   logScreenView(screenName: string): Promise<any> {
     return;
   }
 
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   forcePushData(): Promise<any> {
     return;
   }
 
   // Push notifications
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   setDeviceToken(deviceToken: string): Promise<any> {
     return;
   }
 
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   getInitialNotification(): Promise<any> {
     return;
   }
 
-  @Cordova({ sync: true })
+  @cordova({ sync: true })
   setOnRetenoPushReceivedListener(listener: RetenoPushReceivedListener): void {}
 
-  @Cordova({ sync: true })
+  @cordova({ sync: true })
   removeOnRetenoPushReceivedListener(listener: RetenoPushReceivedListener): void {}
 
-  @Cordova({ sync: true })
+  @cordova({ sync: true })
   setOnRetenoNotificationClickedListener(listener: RetenoNotificationClickedListener): void {}
 
-  @Cordova({ sync: true })
+  @cordova({ sync: true })
   removeOnRetenoNotificationClickedListener(listener: RetenoNotificationClickedListener): void {}
 
-  @Cordova({ sync: true })
+  @cordova({ sync: true })
   setOnRetenoPushDismissedListener(listener: RetenoPushDismissedListener): void {}
 
-  @Cordova({ sync: true })
+  @cordova({ sync: true })
   removeOnRetenoPushDismissedListener(listener: RetenoPushDismissedListener): void {}
 
-  @Cordova({ sync: true })
+  @cordova({ sync: true })
   setOnRetenoCustomPushReceivedListener(listener: RetenoCustomPushReceivedListener): void {}
 
-  @Cordova({ sync: true })
+  @cordova({ sync: true })
   removeOnRetenoCustomPushReceivedListener(listener: RetenoCustomPushReceivedListener): void {}
 
-  @Cordova({ sync: true })
+  @cordova({ sync: true })
   setOnRetenoPushButtonClickedListener(listener: RetenoPushButtonClickedListener): void {}
 
-  @Cordova({ sync: true })
+  @cordova({ sync: true })
   removeOnRetenoPushButtonClickedListener(listener: RetenoPushButtonClickedListener): void {}
 
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   setNotificationActionHandler(options?: NotificationResponseHandlerOptions | boolean): Promise<any> {
     return;
   }
 
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   setWillPresentNotificationOptions(payload: WillPresentNotificationOptionsPayload | NotificationPresentationOption[] | null): Promise<any> {
     return;
   }
 
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   setDidReceiveNotificationResponseHandler(options?: NotificationResponseHandlerOptions | boolean | null): Promise<any> {
     return;
   }
 
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   updateDefaultNotificationChannel(payload: NotificationChannelConfig): Promise<any> {
     return;
   }
 
   // In-app messages
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   pauseInAppMessages(pause: boolean): Promise<any> {
     return;
   }
 
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   setInAppMessagesPauseBehaviour(behaviour: InAppPauseBehaviour): Promise<any> {
     return;
   }
 
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   setOnInAppLifecycleCallback(callback: InAppLifecycleListener | null): Promise<any> {
     return;
   }
 
-  @Cordova({ sync: true })
+  @cordova({ sync: true })
   setOnInAppMessageCustomDataReceivedListener(listener: RetenoInAppCustomDataListener): void {}
 
-  @Cordova({ sync: true })
+  @cordova({ sync: true })
   removeOnInAppMessageCustomDataReceivedListener(listener: RetenoInAppCustomDataListener): void {}
 
   // App Inbox
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   getAppInboxMessages(payload: GetAppInboxMessagesPayload): Promise<AppInboxMessages> {
     return;
   }
 
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   getAppInboxMessagesCount(): Promise<number> {
     return;
   }
 
-  @Cordova({ observable: true, clearFunction: 'unsubscribeMessagesCountChanged' })
+  @cordova({ observable: true, clearFunction: 'unsubscribeMessagesCountChanged' })
   subscribeOnMessagesCountChanged(): Observable<number> {
     return;
   }
 
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   unsubscribeMessagesCountChanged(): Promise<any> {
     return;
   }
 
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   markAsOpened(messageId: string): Promise<any> {
     return;
   }
 
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   markAllMessagesAsOpened(): Promise<any> {
     return;
   }
 
   // Recommendations
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   getRecommendations(payload: GetRecommendationsPayload): Promise<RecommendationsResponse> {
     return;
   }
 
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   logRecommendations(payload: LogRecommendationsPayload): Promise<any> {
     return;
   }
@@ -573,7 +573,7 @@ export class AwesomeCordovaPluginReteno extends AwesomeCordovaNativePlugin {
   /**
    * @deprecated this method of Reteno initialization is deprecated, use init() instead
    */
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   setApiKey(apiKey: string): Promise<any> {
     return;
   }
@@ -581,7 +581,7 @@ export class AwesomeCordovaPluginReteno extends AwesomeCordovaNativePlugin {
   /**
    * @deprecated use setDeviceToken() instead if another plugin handles push tokens
    */
-  @Cordova({ otherPromise: true })
+  @cordova({ otherPromise: true })
   performRemoteToken(apiKey: string): Promise<any> {
     return;
   }
@@ -589,12 +589,12 @@ export class AwesomeCordovaPluginReteno extends AwesomeCordovaNativePlugin {
   /**
    * @deprecated use init() with lifecycleTrackingOptions instead
    */
-  @Cordova({ sync: true })
+  @cordova({ sync: true })
   registerApplicationDidBecomeActiveListener(fn: () => void): void {}
 
   /**
    * @deprecated use init() with lifecycleTrackingOptions instead
    */
-  @Cordova({ sync: true })
+  @cordova({ sync: true })
   registerApplicationDidEnterBackgroundListener(fn: () => void): void {}
 }
