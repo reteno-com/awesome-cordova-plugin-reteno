@@ -21,16 +21,18 @@ export const PLUGINS_ROOT = join(ROOT, 'src');
 export const PLUGIN_PATHS = [join(ROOT, 'src', 'index.ts')];
 
 export function getDecorator(node: Node, index = 0): Decorator {
-  if (node.decorators && node.decorators[index]) {
-    return node.decorators[index];
+  const decorators = (node as any).decorators as Decorator[] | undefined;
+  if (decorators && decorators[index]) {
+    return decorators[index];
   }
 }
 
 export function hasDecorator(decoratorName: string, node: Node): boolean {
+  const decorators = (node as any).decorators as Decorator[] | undefined;
   return (
-    node.decorators &&
-    node.decorators.length &&
-    node.decorators.findIndex((d) => getDecoratorName(d) === decoratorName) > -1
+    decorators &&
+    decorators.length > 0 &&
+    decorators.findIndex((d) => getDecoratorName(d) === decoratorName) > -1
   );
 }
 

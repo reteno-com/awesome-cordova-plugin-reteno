@@ -10,7 +10,7 @@
     "moduleResolution": "node",
     "outDir": "./dist",
     "rootDir": "src",
-    "target": "es5",
+    "target": "es2015",
     "skipLibCheck": true,
     "lib": ["es2017", "dom"],
     "inlineSources": true,

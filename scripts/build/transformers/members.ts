@@ -8,7 +8,8 @@ export function transformMembers(cls: ClassDeclaration) {
 
   const members = cls.members.map((member: any, index: number) => {
     // only process decorated members
-    if (!member.decorators || !member.decorators.length) return member;
+    const decorators = (member as any).decorators;
+    if (!decorators || !decorators.length) return member;
 
     switch (member.kind) {
       case SyntaxKind.MethodDeclaration:

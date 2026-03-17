@@ -37,8 +37,8 @@ function transformClass(cls: any, ngcBuild?: boolean) {
   }
 
   cls = factory.createClassDeclaration(
-    ngcBuild && cls.decorators && cls.decorators.length
-      ? cls.decorators.filter((d) => getDecoratorName(d) === 'Injectable')
+    ngcBuild && (cls as any).decorators && (cls as any).decorators.length
+      ? (cls as any).decorators.filter((d: any) => getDecoratorName(d) === 'Injectable')
       : undefined, // remove Plugin and Injectable decorators
     [factory.createToken(SyntaxKind.ExportKeyword)],
     cls.name,
