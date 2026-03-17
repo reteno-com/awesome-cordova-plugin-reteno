@@ -25,7 +25,6 @@ function transformClass(cls: any, ngcBuild?: boolean) {
     for (const prop in pluginDecoratorArgs) {
       pluginStatics.push(
         factory.createPropertyDeclaration(
-          undefined,
           [factory.createToken(SyntaxKind.StaticKeyword)],
           factory.createIdentifier(prop),
           undefined,
@@ -36,11 +35,14 @@ function transformClass(cls: any, ngcBuild?: boolean) {
     }
   }
 
+  const modifiers: any[] = [factory.createToken(SyntaxKind.ExportKeyword)];
+  if (ngcBuild && (cls as any).decorators && (cls as any).decorators.length) {
+    const injectableDecorators = (cls as any).decorators.filter((d: any) => getDecoratorName(d) === 'Injectable');
+    modifiers.unshift(...injectableDecorators);
+  }
+
   cls = factory.createClassDeclaration(
-    ngcBuild && (cls as any).decorators && (cls as any).decorators.length
-      ? (cls as any).decorators.filter((d: any) => getDecoratorName(d) === 'Injectable')
-      : undefined, // remove Plugin and Injectable decorators
-    [factory.createToken(SyntaxKind.ExportKeyword)],
+    modifiers,
     cls.name,
     cls.typeParameters,
     cls.heritageClauses,
@@ -58,7 +60,7 @@ function transformClasses(file: SourceFile, ctx: TransformationContext, ngcBuild
     (node) => {
       if (
         node.kind !== SyntaxKind.ClassDeclaration ||
-        (node.modifiers && node.modifiers.find((v) => v.kind === SyntaxKind.DeclareKeyword))
+        ((node as any).modifiers && (node as any).modifiers.find((v: any) => v.kind === SyntaxKind.DeclareKeyword))
       ) {
         return node;
       }
