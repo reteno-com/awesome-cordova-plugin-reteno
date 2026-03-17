@@ -40,7 +40,6 @@ function transformImports(file: SourceFile, ctx: TransformationContext, ngcBuild
     let methods = [];
 
     decorators.forEach((d) => (methods = getMethodsForDecorator(d).concat(methods)));
-
     const methodElements = methods.map((m) => factory.createIdentifier(m));
     const methodNames = methodElements.map((el) => el.escapedText);
 
