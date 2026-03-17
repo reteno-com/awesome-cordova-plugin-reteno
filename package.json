@@ -11,7 +11,7 @@
     "prebuild": "rimraf -rf dist",
     "release": "release-it",
     "release:minor": "release-it minor",
-    "release:current": "npm publish dist"
+    "release:current": "release-it --no-increment"
   },
   "peerDependencies": {
     "@awesome-cordova-plugins/core": "^5.45.0",
