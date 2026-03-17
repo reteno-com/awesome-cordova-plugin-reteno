@@ -11,7 +11,7 @@ Install the Cordova plugin and the Ionic Native wrapper:
 cordova plugin add cordova-plugin-reteno --variable SDK_ACCESS_KEY=YOUR_ACCESS_KEY
 
 # Ionic Native wrapper
-npm install awesome-cordova-plugins-reteno@7
+npm install awesome-cordova-plugins-reteno@8
 ```
 
 Also install `@awesome-cordova-plugins/core` if not already present:

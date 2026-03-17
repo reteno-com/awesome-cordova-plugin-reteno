@@ -1,6 +1,6 @@
 {
   "name": "awesome-cordova-plugins-reteno",
-  "version": "7.0.0",
+  "version": "8.0.0",
   "description": "Native plugin wrapper for cordova-plugin-reteno",
   "scripts": {
     "build:esm": "ts-node -P scripts/tsconfig.json scripts/tasks/build-esm",
@@ -13,15 +13,15 @@
     "release:minor": "release-it minor"
   },
   "peerDependencies": {
-    "@awesome-cordova-plugins/core": "^7.0.1",
+    "@awesome-cordova-plugins/core": "^8.1.0",
     "rxjs": "^7.0.0"
   },
   "devDependencies": {
-    "@angular/common": "16.2.12",
-    "@angular/compiler": "16.2.12",
-    "@angular/compiler-cli": "16.2.12",
-    "@angular/core": "16.2.12",
-    "@awesome-cordova-plugins/core": "^7.0.1",
+    "@angular/common": "17.3.12",
+    "@angular/compiler": "17.3.12",
+    "@angular/compiler-cli": "17.3.12",
+    "@angular/core": "17.3.12",
+    "@awesome-cordova-plugins/core": "^8.1.0",
     "@release-it/conventional-changelog": "^8.0.1",
     "@types/cordova": "0.0.34",
     "@types/fs-extra": "9.0.13",
@@ -37,11 +37,11 @@
     "rxjs": "7.8.1",
     "terser-webpack-plugin": "5.3.1",
     "ts-node": "10.7.0",
-    "typescript": "5.1.6",
+    "typescript": "5.4.5",
     "unminified-webpack-plugin": "3.0.0",
     "webpack": "5.71.0",
     "winston": "3.7.2",
-    "zone.js": "0.13.3"
+    "zone.js": "0.14.4"
   },
   "main": "index.js",
   "dependencies": {
