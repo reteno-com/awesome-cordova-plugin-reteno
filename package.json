@@ -219,7 +219,9 @@
     },
     "hooks": {
       "before:init": [
-        "npm install",
+        "npm install"
+      ],
+      "after:bump": [
         "npm run build"
       ]
     }
