@@ -42,7 +42,7 @@ export function transformProperty(members: any[], index: number) {
     undefined,
     undefined,
     property.name,
-    [factory.createParameterDeclaration(undefined, undefined, undefined, 'value', undefined, property.type)],
+    [factory.createParameterDeclaration(undefined, undefined, undefined, 'value', undefined, property.type, undefined)],
     factory.createBlock([
       factory.createExpressionStatement(
         factory.createCallExpression(factory.createIdentifier(type + 'PropertySet'), undefined, [

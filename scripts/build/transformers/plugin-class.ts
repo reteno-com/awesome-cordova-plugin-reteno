@@ -9,7 +9,7 @@ import {
 } from 'typescript';
 
 import { Logger } from '../../logger';
-import { convertValueToLiteral, getDecorator, getDecoratorArgs, getDecoratorName } from '../helpers';
+import { convertValueToLiteral, getDecorator, getDecoratorArgs, getDecoratorName, getNodeDecorators } from '../helpers';
 import { transformMembers } from './members';
 
 function transformClass(cls: any, ngcBuild?: boolean) {
@@ -36,11 +36,16 @@ function transformClass(cls: any, ngcBuild?: boolean) {
     }
   }
 
+  const modifiers: any[] = [factory.createToken(SyntaxKind.ExportKeyword)];
+  const classDecorators = getNodeDecorators(cls as any);
+  if (ngcBuild && classDecorators.length) {
+    const injectableDecorators = classDecorators.filter((d: any) => getDecoratorName(d) === 'Injectable');
+    modifiers.unshift(...injectableDecorators);
+  }
+
   cls = factory.createClassDeclaration(
-    ngcBuild && cls.decorators && cls.decorators.length
-      ? cls.decorators.filter((d) => getDecoratorName(d) === 'Injectable')
-      : undefined, // remove Plugin and Injectable decorators
-    [factory.createToken(SyntaxKind.ExportKeyword)],
+    undefined,
+    modifiers,
     cls.name,
     cls.typeParameters,
     cls.heritageClauses,
@@ -58,7 +63,7 @@ function transformClasses(file: SourceFile, ctx: TransformationContext, ngcBuild
     (node) => {
       if (
         node.kind !== SyntaxKind.ClassDeclaration ||
-        (node.modifiers && node.modifiers.find((v) => v.kind === SyntaxKind.DeclareKeyword))
+        ((node as any).modifiers && (node as any).modifiers.find((v: any) => v.kind === SyntaxKind.DeclareKeyword))
       ) {
         return node;
       }

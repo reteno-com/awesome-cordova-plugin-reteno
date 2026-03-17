@@ -1,5 +1,5 @@
 import { CompilerHost, CompilerOptions, createCompilerHost, createProgram, EmitFlags } from '@angular/compiler-cli';
-import { copyFileSync, mkdirpSync, readJSONSync, writeJSONSync } from 'fs-extra';
+import { copyFileSync, existsSync, mkdirpSync, readJSONSync, writeJSONSync } from 'fs-extra';
 import { clone } from 'lodash';
 import { dirname, join, resolve } from 'path';
 import { sync } from 'rimraf';
@@ -82,6 +82,10 @@ export function modifyMetadata() {
   PLUGIN_PATHS.map((p) =>
     p.replace(join(ROOT, 'src'), join(ROOT, 'dist')).replace('index.ts', 'ngx/index.metadata.json')
   ).forEach((p) => {
+    if (!existsSync(p)) {
+      return;
+    }
+
     const content = readJSONSync(p);
     let _prop: { members: { [x: string]: any[] } };
     for (const prop in content[0].metadata) {
