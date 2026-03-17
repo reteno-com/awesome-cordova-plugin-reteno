@@ -2,9 +2,9 @@
 node_modules/
 .idea
 .tmp
+tmp/
 aot/
 dist/
 src/@awesome-cordova-plugins/plugins/**/ngx
 *.d.ts
 injectable-classes.json
-
