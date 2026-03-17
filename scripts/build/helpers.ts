@@ -20,15 +20,25 @@ export const COMPILER_OPTIONS = TS_CONFIG.compilerOptions;
 export const PLUGINS_ROOT = join(ROOT, 'src');
 export const PLUGIN_PATHS = [join(ROOT, 'src', 'index.ts')];
 
+export function getNodeDecorators(node: any): Decorator[] {
+  const decorators = node?.decorators as Decorator[] | undefined;
+  if (decorators && decorators.length) return decorators;
+
+  const modifiers = node?.modifiers as any[] | undefined;
+  if (!modifiers || !modifiers.length) return [];
+
+  return modifiers.filter((m) => m.kind === SyntaxKind.Decorator) as Decorator[];
+}
+
 export function getDecorator(node: Node, index = 0): Decorator {
-  const decorators = (node as any).decorators as Decorator[] | undefined;
+  const decorators = getNodeDecorators(node as any);
   if (decorators && decorators[index]) {
     return decorators[index];
   }
 }
 
 export function hasDecorator(decoratorName: string, node: Node): boolean {
-  const decorators = (node as any).decorators as Decorator[] | undefined;
+  const decorators = getNodeDecorators(node as any);
   return (
     decorators &&
     decorators.length > 0 &&
@@ -37,12 +47,15 @@ export function hasDecorator(decoratorName: string, node: Node): boolean {
 }
 
 export function getDecoratorName(decorator: any) {
-  return decorator.expression.expression.text;
+  if (!decorator || !decorator.expression) return;
+  const expr = decorator.expression.expression || decorator.expression;
+  return expr.text || expr.escapedText;
 }
 
 export function getRawDecoratorArgs(decorator: any): any[] {
-  if (decorator.expression.arguments.length === 0) return [];
-  return decorator.expression.arguments[0].properties;
+  const args = decorator?.expression?.arguments;
+  if (!args || args.length === 0) return [];
+  return args[0].properties;
 }
 
 export function getDecoratorArgs(decorator: any) {

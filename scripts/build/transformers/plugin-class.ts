@@ -9,7 +9,7 @@ import {
 } from 'typescript';
 
 import { Logger } from '../../logger';
-import { convertValueToLiteral, getDecorator, getDecoratorArgs, getDecoratorName } from '../helpers';
+import { convertValueToLiteral, getDecorator, getDecoratorArgs, getDecoratorName, getNodeDecorators } from '../helpers';
 import { transformMembers } from './members';
 
 function transformClass(cls: any, ngcBuild?: boolean) {
@@ -36,9 +36,10 @@ function transformClass(cls: any, ngcBuild?: boolean) {
     }
   }
 
+  const classDecorators = getNodeDecorators(cls as any);
   cls = factory.createClassDeclaration(
-    ngcBuild && (cls as any).decorators && (cls as any).decorators.length
-      ? (cls as any).decorators.filter((d: any) => getDecoratorName(d) === 'Injectable')
+    ngcBuild && classDecorators.length
+      ? classDecorators.filter((d: any) => getDecoratorName(d) === 'Injectable')
       : undefined, // remove Plugin and Injectable decorators
     [factory.createToken(SyntaxKind.ExportKeyword)],
     cls.name,
