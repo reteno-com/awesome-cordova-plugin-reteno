@@ -1,5 +1,6 @@
 import { ClassDeclaration, factory, SyntaxKind } from 'typescript';
 
+import { getNodeDecorators } from '../helpers';
 import { transformMethod } from './methods';
 import { transformProperty } from './properties';
 
@@ -8,7 +9,7 @@ export function transformMembers(cls: ClassDeclaration) {
 
   const members = cls.members.map((member: any, index: number) => {
     // only process decorated members
-    const decorators = (member as any).decorators;
+    const decorators = getNodeDecorators(member as any);
     if (!decorators || !decorators.length) return member;
 
     switch (member.kind) {

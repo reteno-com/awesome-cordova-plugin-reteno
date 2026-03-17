@@ -9,7 +9,7 @@ import {
 } from 'typescript';
 
 import { Logger } from '../../logger';
-import { convertValueToLiteral, getDecorator, getDecoratorArgs, getDecoratorName } from '../helpers';
+import { convertValueToLiteral, getDecorator, getDecoratorArgs, getDecoratorName, getNodeDecorators } from '../helpers';
 import { transformMembers } from './members';
 
 function transformClass(cls: any, ngcBuild?: boolean) {
@@ -36,8 +36,9 @@ function transformClass(cls: any, ngcBuild?: boolean) {
   }
 
   const modifiers: any[] = [];
-  if (ngcBuild && (cls as any).decorators && (cls as any).decorators.length) {
-    modifiers.push(...(cls as any).decorators.filter((d: any) => getDecoratorName(d) === 'Injectable'));
+  const classDecorators = getNodeDecorators(cls as any);
+  if (ngcBuild && classDecorators.length) {
+    modifiers.push(...classDecorators.filter((d: any) => getDecoratorName(d) === 'Injectable'));
   }
   modifiers.push(factory.createToken(SyntaxKind.ExportKeyword));
 
