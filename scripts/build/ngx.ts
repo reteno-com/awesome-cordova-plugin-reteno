@@ -16,7 +16,9 @@ export function getProgram(rootNames: string[] = createSourceFiles()) {
   options.basePath = ROOT;
   options.moduleResolution = ModuleResolutionKind.NodeJs;
   options.module = ModuleKind.ES2015;
-  options.target = ScriptTarget.ES5;
+  // Core v7+ exports real ES classes; ES5 downleveling causes
+  // "Cannot call a class constructor ... without 'new'" at runtime.
+  options.target = ScriptTarget.ES2015;
   options.lib = ['dom', 'es2017'];
   options.inlineSourceMap = true;
   options.importHelpers = true;
