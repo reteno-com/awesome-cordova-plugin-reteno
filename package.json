@@ -216,6 +216,12 @@
       "@release-it/conventional-changelog": {
         "preset": "angular"
       }
+    },
+    "hooks": {
+      "before:init": [
+        "npm install",
+        "npm run build"
+      ]
     }
   }
 }
