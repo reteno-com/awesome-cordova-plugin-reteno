@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'fs-extra';
+import { copyFileSync, readFileSync, writeFileSync } from 'fs-extra';
 import path = require('path');
 import { ROOT } from '../build/helpers';
 
@@ -13,3 +13,4 @@ const newPackageJson = {
 }
 
 writeFileSync(path.join(ROOT, "dist/package.json"), JSON.stringify(newPackageJson, null, 4));
+copyFileSync(path.join(ROOT, "README.md"), path.join(ROOT, "dist/README.md"));
