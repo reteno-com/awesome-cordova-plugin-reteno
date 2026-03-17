@@ -10,7 +10,8 @@
     "build": "npm run build:esm && npm run build:ngx && npm run build:es5 && npm run build:packagejson",
     "prebuild": "rimraf -rf dist",
     "release": "release-it",
-    "release:minor": "release-it minor"
+    "release:minor": "release-it minor",
+    "release:current": "npm publish dist"
   },
   "peerDependencies": {
     "@awesome-cordova-plugins/core": "^7.0.1",
@@ -205,7 +206,8 @@
       "pushRepo": "https://github.com/reteno-com/awesome-cordova-plugin-reteno.git"
     },
     "npm": {
-      "publish": true
+      "publish": true,
+      "publishPath": "dist"
     },
     "github": {
       "release": true
