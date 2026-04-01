@@ -25,7 +25,7 @@ export function getProgram(declaration = false, pluginPaths: string[] = PLUGIN_P
   const compilerOptions: CompilerOptions = clone(COMPILER_OPTIONS);
   compilerOptions.declaration = declaration;
   compilerOptions.moduleResolution = ModuleResolutionKind.NodeJs;
-  compilerOptions.target = ScriptTarget.ES5;
+  compilerOptions.target = ScriptTarget.ES2015;
   compilerOptions.module = ModuleKind.ES2015;
   compilerOptions.inlineSourceMap = true;
   compilerOptions.inlineSources = true;

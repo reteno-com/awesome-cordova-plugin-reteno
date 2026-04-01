@@ -1,6 +1,6 @@
 {
   "name": "awesome-cordova-plugins-reteno",
-  "version": "8.0.1",
+  "version": "9.0.0",
   "description": "Native plugin wrapper for cordova-plugin-reteno",
   "scripts": {
     "build:esm": "ts-node -P scripts/tsconfig.json scripts/tasks/build-esm",
@@ -14,7 +14,7 @@
     "release:current": "npm install && npm run build && npm publish ./dist"
   },
   "peerDependencies": {
-    "@awesome-cordova-plugins/core": "^8.1.0",
+    "@awesome-cordova-plugins/core": "^9.1.2",
     "rxjs": "^7.0.0"
   },
   "devDependencies": {
@@ -22,7 +22,7 @@
     "@angular/compiler": "17.3.12",
     "@angular/compiler-cli": "17.3.12",
     "@angular/core": "17.3.12",
-    "@awesome-cordova-plugins/core": "^8.1.0",
+    "@awesome-cordova-plugins/core": "^9.1.2",
     "@release-it/conventional-changelog": "^8.0.1",
     "@types/cordova": "0.0.34",
     "@types/fs-extra": "9.0.13",

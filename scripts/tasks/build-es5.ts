@@ -81,7 +81,7 @@ function compile() {
     Logger.profile('build-es5');
     if (err) Logger.error('Error occurred while compiling with Webpack', err);
     else {
-      Logger.info('Compiled ES5 file with Webpack successfully.');
+      Logger.info('Compiled ES2015 file with Webpack successfully.');
     }
     cleanEmittedData();
   });
