@@ -82,8 +82,12 @@ export type NotificationResponseHandlerOptions = {
 export type LifecycleTrackingOptions =
   | {
       appLifecycleEnabled?: boolean | null;
+      foregroundLifecycleEnabled?: boolean | null;
       pushSubscriptionEnabled?: boolean | null;
+      /** @deprecated Use sessionStartEventsEnabled/sessionEndEventsEnabled instead. */
       sessionEventsEnabled?: boolean | null;
+      sessionStartEventsEnabled?: boolean | null;
+      sessionEndEventsEnabled?: boolean | null;
     }
   | 'ALL'
   | 'NONE'
@@ -96,6 +100,7 @@ export type RetenoInitializeOptions = {
   inAppMessagesPauseBehaviour?: InAppPauseBehaviour;
   isAutomaticScreenReportingEnabled?: boolean;
   lifecycleTrackingOptions?: LifecycleTrackingOptions;
+  sessionDurationSeconds?: number;
   isDebugMode?: boolean;
 };
 
