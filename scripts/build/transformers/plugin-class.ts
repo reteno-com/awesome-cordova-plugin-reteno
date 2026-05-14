@@ -1,6 +1,7 @@
 import {
   Decorator,
   factory,
+  PropertyDeclaration,
   SourceFile,
   SyntaxKind,
   TransformationContext,
@@ -15,7 +16,7 @@ import { transformMembers } from './members';
 function transformClass(cls: any, ngcBuild?: boolean) {
   Logger.profile('transformClass: ' + cls.name.text);
 
-  const pluginStatics = [];
+  const pluginStatics: PropertyDeclaration[] = [];
   const dec: Decorator = getDecorator(cls);
 
   if (dec) {
@@ -25,7 +26,6 @@ function transformClass(cls: any, ngcBuild?: boolean) {
     for (const prop in pluginDecoratorArgs) {
       pluginStatics.push(
         factory.createPropertyDeclaration(
-          undefined,
           [factory.createToken(SyntaxKind.StaticKeyword)],
           factory.createIdentifier(prop),
           undefined,
@@ -44,7 +44,6 @@ function transformClass(cls: any, ngcBuild?: boolean) {
   }
 
   cls = factory.createClassDeclaration(
-    undefined,
     modifiers,
     cls.name,
     cls.typeParameters,
