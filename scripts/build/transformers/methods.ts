@@ -20,7 +20,6 @@ export function transformMethod(method: MethodDeclaration) {
     return factory.createMethodDeclaration(
       undefined,
       undefined,
-      undefined,
       method.name,
       undefined,
       method.typeParameters,
@@ -30,7 +29,7 @@ export function transformMethod(method: MethodDeclaration) {
     );
   } catch (e) {
     Logger.error('Error transforming method: ' + (method.name as any).text);
-    Logger.error(e.message);
+    Logger.error((e as Error).message);
   }
 }
 
@@ -48,7 +47,7 @@ function getMethodBlock(method: MethodDeclaration, decoratorName: string, decora
             SyntaxKind.EqualsEqualsEqualsToken,
             factory.createTrue()
           ),
-          method.body
+          method.body!
         ),
       ]);
 
@@ -56,7 +55,7 @@ function getMethodBlock(method: MethodDeclaration, decoratorName: string, decora
       return factory.createCallExpression(factory.createIdentifier(decoratorMethod), undefined, [
         factory.createThis(),
         factory.createStringLiteral(decoratorArgs?.methodName || (method.name as any).text),
-        convertValueToLiteral(decoratorArgs),
+        convertValueToLiteral(decoratorArgs) ?? factory.createIdentifier('undefined'),
         factory.createIdentifier('arguments'),
       ]);
   }

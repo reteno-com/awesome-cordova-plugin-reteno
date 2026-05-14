@@ -1,6 +1,8 @@
 import {
+  ClassDeclaration,
   Decorator,
   factory,
+  PropertyDeclaration,
   SourceFile,
   SyntaxKind,
   TransformationContext,
@@ -15,7 +17,7 @@ import { transformMembers } from './members';
 function transformClass(cls: any, ngcBuild?: boolean) {
   Logger.profile('transformClass: ' + cls.name.text);
 
-  const pluginStatics = [];
+  const pluginStatics: PropertyDeclaration[] = [];
   const dec: Decorator = getDecorator(cls);
 
   if (dec) {
@@ -25,7 +27,6 @@ function transformClass(cls: any, ngcBuild?: boolean) {
     for (const prop in pluginDecoratorArgs) {
       pluginStatics.push(
         factory.createPropertyDeclaration(
-          undefined,
           [factory.createToken(SyntaxKind.StaticKeyword)],
           factory.createIdentifier(prop),
           undefined,
@@ -38,10 +39,12 @@ function transformClass(cls: any, ngcBuild?: boolean) {
 
   const classDecorators = getNodeDecorators(cls as any);
   cls = factory.createClassDeclaration(
-    ngcBuild && classDecorators.length
-      ? classDecorators.filter((d: any) => getDecoratorName(d) === 'Injectable')
-      : undefined, // remove Plugin and Injectable decorators
-    [factory.createToken(SyntaxKind.ExportKeyword)],
+    [
+      ...(ngcBuild && classDecorators.length
+        ? classDecorators.filter((d: any) => getDecoratorName(d) === 'Injectable')
+        : []),
+      factory.createToken(SyntaxKind.ExportKeyword),
+    ],
     cls.name,
     cls.typeParameters,
     cls.heritageClauses,
@@ -57,13 +60,14 @@ function transformClasses(file: SourceFile, ctx: TransformationContext, ngcBuild
   return visitEachChild(
     file,
     (node) => {
-      if (
-        node.kind !== SyntaxKind.ClassDeclaration ||
-        (node.modifiers && node.modifiers.find((v) => v.kind === SyntaxKind.DeclareKeyword))
-      ) {
+      if (node.kind !== SyntaxKind.ClassDeclaration) {
         return node;
       }
-      return transformClass(node, ngcBuild);
+      const classNode = node as ClassDeclaration;
+      if (classNode.modifiers && classNode.modifiers.find((v) => v.kind === SyntaxKind.DeclareKeyword)) {
+        return node;
+      }
+      return transformClass(classNode, ngcBuild);
     },
     ctx
   );
