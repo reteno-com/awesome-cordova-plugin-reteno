@@ -24,6 +24,7 @@ export function transformProperty(members: any[], index: number) {
 
   const getter = factory.createGetAccessorDeclaration(
     undefined,
+    undefined,
     property.name,
     [],
     property.type,
@@ -39,8 +40,9 @@ export function transformProperty(members: any[], index: number) {
 
   const setter = factory.createSetAccessorDeclaration(
     undefined,
+    undefined,
     property.name,
-    [factory.createParameterDeclaration(undefined, undefined, 'value', undefined, property.type)],
+    [factory.createParameterDeclaration(undefined, undefined, undefined, 'value', undefined, property.type, undefined)],
     factory.createBlock([
       factory.createExpressionStatement(
         factory.createCallExpression(factory.createIdentifier(type + 'PropertySet'), undefined, [

@@ -26,6 +26,7 @@ function transformClass(cls: any, ngcBuild?: boolean) {
     for (const prop in pluginDecoratorArgs) {
       pluginStatics.push(
         factory.createPropertyDeclaration(
+          undefined,
           [factory.createToken(SyntaxKind.StaticKeyword)],
           factory.createIdentifier(prop),
           undefined,
@@ -44,6 +45,7 @@ function transformClass(cls: any, ngcBuild?: boolean) {
   }
 
   cls = factory.createClassDeclaration(
+    undefined,
     modifiers,
     cls.name,
     cls.typeParameters,
