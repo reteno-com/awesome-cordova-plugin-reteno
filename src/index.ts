@@ -150,6 +150,14 @@ export type NotificationChannelConfig = {
   description: string;
 };
 
+/**
+ * Android notification grouping rule. The rule is persisted natively so it
+ * remains available when a push is handled before the WebView starts.
+ */
+export type NotificationGroupingRule =
+  | { payloadKey: string; groupId?: never }
+  | { groupId: string; payloadKey?: never };
+
 export type AppInboxStatus = 'OPENED' | 'UNOPENED';
 
 export type AppInboxMessage = {
@@ -515,6 +523,11 @@ export class AwesomeCordovaPluginReteno extends AwesomeCordovaNativePlugin {
 
   @Cordova({ otherPromise: true })
   updateDefaultNotificationChannel(payload: NotificationChannelConfig): Promise<any> {
+    return;
+  }
+
+  @Cordova({ otherPromise: true })
+  setNotificationGroupingRule(config: NotificationGroupingRule | null): Promise<any> {
     return;
   }
 
